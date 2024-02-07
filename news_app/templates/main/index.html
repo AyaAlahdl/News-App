@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>News Project</title>
+    <!-- Link to Bootstrap stylesheet -->
+    <link href="https://bootswatch.com/5/journal/bootstrap.min.css" rel="stylesheet">
+</head>
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="{% static 'image/newsLogo.jpg' %}"  style="width: 50px; border-radius: 50px;" alt="Logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<body style="background-color: rgb(240, 240, 240);">
+    <div id="carouselExampleCaptions" class="carousel slide ">
+        <div class="carousel-indicators">
+        
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'image/markus.jpg' %}" style="height: 690px;"  class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1>Latest News using</h1>
+              <br>
+              <a href="https://newsapi.org" class="btn btn-outline-light" style="text-decoration: none;">News API</a> 
+            </div>
+          </div>
+        </div>
+   <br>
+   <div class="container">
+       <div class="row">
+            {% for hl, des, img in mylist %}
+                <div class="col-md-4 mb-4">
+                    <div class="card border-light">
+                        <h3 class="card-header bg-dark text-white">HeadLine:</h3>
+                        <div class="card-body">
+                            <h5 class="card-title">{{hl}}</h5>
+                        </div>
+                        <img src="{{ img }}" alt="image" class="card-img-top" style="height: 200px;">
+                        <div class="card-body">
+                            <h3 class="card-title">Description:</h3>
+                            <hr>
+                            <p class="card-text">{{ des }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
