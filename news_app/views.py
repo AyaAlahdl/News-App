@@ -1,20 +1,29 @@
 from django.shortcuts import render
-
 from newsapi import NewsApiClient
-# Create your views here.
+
 def index(request):
-    newsApi = NewsApiClient(api_key = '7cb15d163cd944f38bfd5682e5ad49d9')
-    headLines = newsApi.get_top_headlines(sources = 'techcrunch')
+    newsApi = NewsApiClient(api_key='7cb15d163cd944f38bfd5682e5ad49d9')
+    headLines = newsApi.get_top_headlines(sources='techcrunch')
     articles = headLines['articles']
-    desc = []
-    news = []
-    img = []
+    
+    # Lists to store data
+    titles = []
+    descriptions = []
+    images = []
+    authors = []
+    urls = []
+    published_ats = []
 
-    for i in range(len(articles)):
-        article = articles[i]
-        desc.append(article['description'])
-        news.append(article['title'])
-        img.append(article['urlToImage'])
-    myist = zip(news, desc, img)
+    # Extracting data from articles
+    for article in articles:
+        titles.append(article['title'])
+        descriptions.append(article['description'])
+        images.append(article['urlToImage'])
+        authors.append(article['author'])
+        urls.append(article['url'])
+        published_ats.append(article['publishedAt'])
 
-    return render(request, "main/index.html", context={"mylist": myist})
+    # Zipping data into a single iterable
+    news_data = zip(titles, descriptions, images, authors, urls, published_ats)
+
+    return render(request, "main/index.html", context={"news_data": news_data})
